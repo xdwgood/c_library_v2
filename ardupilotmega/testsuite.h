@@ -526,7 +526,7 @@ static void mavlink_test_mount_status(uint8_t system_id, uint8_t component_id, m
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_mount_status_t packet_in = {
-        963497464,963497672,963497880,41,108,175
+        963497464,963497672,963497880,41,108
     };
     mavlink_mount_status_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -535,7 +535,6 @@ static void mavlink_test_mount_status(uint8_t system_id, uint8_t component_id, m
         packet1.pointing_c = packet_in.pointing_c;
         packet1.target_system = packet_in.target_system;
         packet1.target_component = packet_in.target_component;
-        packet1.mount_mode = packet_in.mount_mode;
         
         
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
@@ -550,12 +549,12 @@ static void mavlink_test_mount_status(uint8_t system_id, uint8_t component_id, m
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mount_status_pack(system_id, component_id, &msg , packet1.target_system , packet1.target_component , packet1.pointing_a , packet1.pointing_b , packet1.pointing_c , packet1.mount_mode );
+    mavlink_msg_mount_status_pack(system_id, component_id, &msg , packet1.target_system , packet1.target_component , packet1.pointing_a , packet1.pointing_b , packet1.pointing_c );
     mavlink_msg_mount_status_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mount_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.target_system , packet1.target_component , packet1.pointing_a , packet1.pointing_b , packet1.pointing_c , packet1.mount_mode );
+    mavlink_msg_mount_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.target_system , packet1.target_component , packet1.pointing_a , packet1.pointing_b , packet1.pointing_c );
     mavlink_msg_mount_status_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -568,7 +567,7 @@ static void mavlink_test_mount_status(uint8_t system_id, uint8_t component_id, m
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mount_status_send(MAVLINK_COMM_1 , packet1.target_system , packet1.target_component , packet1.pointing_a , packet1.pointing_b , packet1.pointing_c , packet1.mount_mode );
+    mavlink_msg_mount_status_send(MAVLINK_COMM_1 , packet1.target_system , packet1.target_component , packet1.pointing_a , packet1.pointing_b , packet1.pointing_c );
     mavlink_msg_mount_status_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
@@ -2235,7 +2234,7 @@ static void mavlink_test_pid_tuning(uint8_t system_id, uint8_t component_id, mav
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_pid_tuning_t packet_in = {
-        17.0,45.0,73.0,101.0,129.0,157.0,77,192.0,220.0
+        17.0,45.0,73.0,101.0,129.0,157.0,77
     };
     mavlink_pid_tuning_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -2246,8 +2245,6 @@ static void mavlink_test_pid_tuning(uint8_t system_id, uint8_t component_id, mav
         packet1.I = packet_in.I;
         packet1.D = packet_in.D;
         packet1.axis = packet_in.axis;
-        packet1.SRate = packet_in.SRate;
-        packet1.PDmod = packet_in.PDmod;
         
         
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
@@ -2262,12 +2259,12 @@ static void mavlink_test_pid_tuning(uint8_t system_id, uint8_t component_id, mav
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_pid_tuning_pack(system_id, component_id, &msg , packet1.axis , packet1.desired , packet1.achieved , packet1.FF , packet1.P , packet1.I , packet1.D , packet1.SRate , packet1.PDmod );
+    mavlink_msg_pid_tuning_pack(system_id, component_id, &msg , packet1.axis , packet1.desired , packet1.achieved , packet1.FF , packet1.P , packet1.I , packet1.D );
     mavlink_msg_pid_tuning_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_pid_tuning_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.axis , packet1.desired , packet1.achieved , packet1.FF , packet1.P , packet1.I , packet1.D , packet1.SRate , packet1.PDmod );
+    mavlink_msg_pid_tuning_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.axis , packet1.desired , packet1.achieved , packet1.FF , packet1.P , packet1.I , packet1.D );
     mavlink_msg_pid_tuning_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -2280,7 +2277,7 @@ static void mavlink_test_pid_tuning(uint8_t system_id, uint8_t component_id, mav
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_pid_tuning_send(MAVLINK_COMM_1 , packet1.axis , packet1.desired , packet1.achieved , packet1.FF , packet1.P , packet1.I , packet1.D , packet1.SRate , packet1.PDmod );
+    mavlink_msg_pid_tuning_send(MAVLINK_COMM_1 , packet1.axis , packet1.desired , packet1.achieved , packet1.FF , packet1.P , packet1.I , packet1.D );
     mavlink_msg_pid_tuning_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
@@ -3698,190 +3695,6 @@ static void mavlink_test_osd_param_show_config_reply(uint8_t system_id, uint8_t 
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
-static void mavlink_test_obstacle_distance_3d(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
-{
-#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
-    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
-        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_OBSTACLE_DISTANCE_3D >= 256) {
-            return;
-        }
-#endif
-    mavlink_message_t msg;
-        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
-        uint16_t i;
-    mavlink_obstacle_distance_3d_t packet_in = {
-        963497464,45.0,73.0,101.0,129.0,157.0,18483,211,22
-    };
-    mavlink_obstacle_distance_3d_t packet1, packet2;
-        memset(&packet1, 0, sizeof(packet1));
-        packet1.time_boot_ms = packet_in.time_boot_ms;
-        packet1.x = packet_in.x;
-        packet1.y = packet_in.y;
-        packet1.z = packet_in.z;
-        packet1.min_distance = packet_in.min_distance;
-        packet1.max_distance = packet_in.max_distance;
-        packet1.obstacle_id = packet_in.obstacle_id;
-        packet1.sensor_type = packet_in.sensor_type;
-        packet1.frame = packet_in.frame;
-        
-        
-#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
-        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
-           // cope with extensions
-           memset(MAVLINK_MSG_ID_OBSTACLE_DISTANCE_3D_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_OBSTACLE_DISTANCE_3D_MIN_LEN);
-        }
-#endif
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_obstacle_distance_3d_encode(system_id, component_id, &msg, &packet1);
-    mavlink_msg_obstacle_distance_3d_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_obstacle_distance_3d_pack(system_id, component_id, &msg , packet1.time_boot_ms , packet1.sensor_type , packet1.frame , packet1.obstacle_id , packet1.x , packet1.y , packet1.z , packet1.min_distance , packet1.max_distance );
-    mavlink_msg_obstacle_distance_3d_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_obstacle_distance_3d_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.time_boot_ms , packet1.sensor_type , packet1.frame , packet1.obstacle_id , packet1.x , packet1.y , packet1.z , packet1.min_distance , packet1.max_distance );
-    mavlink_msg_obstacle_distance_3d_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-        mavlink_msg_to_send_buffer(buffer, &msg);
-        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
-            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
-        }
-    mavlink_msg_obstacle_distance_3d_decode(last_msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-        
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_obstacle_distance_3d_send(MAVLINK_COMM_1 , packet1.time_boot_ms , packet1.sensor_type , packet1.frame , packet1.obstacle_id , packet1.x , packet1.y , packet1.z , packet1.min_distance , packet1.max_distance );
-    mavlink_msg_obstacle_distance_3d_decode(last_msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-}
-
-static void mavlink_test_water_depth(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
-{
-#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
-    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
-        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_WATER_DEPTH >= 256) {
-            return;
-        }
-#endif
-    mavlink_message_t msg;
-        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
-        uint16_t i;
-    mavlink_water_depth_t packet_in = {
-        963497464,963497672,963497880,101.0,129.0,157.0,185.0,213.0,241.0,113,180
-    };
-    mavlink_water_depth_t packet1, packet2;
-        memset(&packet1, 0, sizeof(packet1));
-        packet1.time_boot_ms = packet_in.time_boot_ms;
-        packet1.lat = packet_in.lat;
-        packet1.lng = packet_in.lng;
-        packet1.alt = packet_in.alt;
-        packet1.roll = packet_in.roll;
-        packet1.pitch = packet_in.pitch;
-        packet1.yaw = packet_in.yaw;
-        packet1.distance = packet_in.distance;
-        packet1.temperature = packet_in.temperature;
-        packet1.id = packet_in.id;
-        packet1.healthy = packet_in.healthy;
-        
-        
-#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
-        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
-           // cope with extensions
-           memset(MAVLINK_MSG_ID_WATER_DEPTH_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_WATER_DEPTH_MIN_LEN);
-        }
-#endif
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_water_depth_encode(system_id, component_id, &msg, &packet1);
-    mavlink_msg_water_depth_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_water_depth_pack(system_id, component_id, &msg , packet1.time_boot_ms , packet1.id , packet1.healthy , packet1.lat , packet1.lng , packet1.alt , packet1.roll , packet1.pitch , packet1.yaw , packet1.distance , packet1.temperature );
-    mavlink_msg_water_depth_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_water_depth_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.time_boot_ms , packet1.id , packet1.healthy , packet1.lat , packet1.lng , packet1.alt , packet1.roll , packet1.pitch , packet1.yaw , packet1.distance , packet1.temperature );
-    mavlink_msg_water_depth_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-        mavlink_msg_to_send_buffer(buffer, &msg);
-        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
-            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
-        }
-    mavlink_msg_water_depth_decode(last_msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-        
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_water_depth_send(MAVLINK_COMM_1 , packet1.time_boot_ms , packet1.id , packet1.healthy , packet1.lat , packet1.lng , packet1.alt , packet1.roll , packet1.pitch , packet1.yaw , packet1.distance , packet1.temperature );
-    mavlink_msg_water_depth_decode(last_msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-}
-
-static void mavlink_test_mcu_status(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
-{
-#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
-    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
-        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_MCU_STATUS >= 256) {
-            return;
-        }
-#endif
-    mavlink_message_t msg;
-        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
-        uint16_t i;
-    mavlink_mcu_status_t packet_in = {
-        17235,17339,17443,17547,29
-    };
-    mavlink_mcu_status_t packet1, packet2;
-        memset(&packet1, 0, sizeof(packet1));
-        packet1.MCU_temperature = packet_in.MCU_temperature;
-        packet1.MCU_voltage = packet_in.MCU_voltage;
-        packet1.MCU_voltage_min = packet_in.MCU_voltage_min;
-        packet1.MCU_voltage_max = packet_in.MCU_voltage_max;
-        packet1.id = packet_in.id;
-        
-        
-#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
-        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
-           // cope with extensions
-           memset(MAVLINK_MSG_ID_MCU_STATUS_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_MCU_STATUS_MIN_LEN);
-        }
-#endif
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mcu_status_encode(system_id, component_id, &msg, &packet1);
-    mavlink_msg_mcu_status_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mcu_status_pack(system_id, component_id, &msg , packet1.id , packet1.MCU_temperature , packet1.MCU_voltage , packet1.MCU_voltage_min , packet1.MCU_voltage_max );
-    mavlink_msg_mcu_status_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mcu_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.id , packet1.MCU_temperature , packet1.MCU_voltage , packet1.MCU_voltage_min , packet1.MCU_voltage_max );
-    mavlink_msg_mcu_status_decode(&msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-
-        memset(&packet2, 0, sizeof(packet2));
-        mavlink_msg_to_send_buffer(buffer, &msg);
-        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
-            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
-        }
-    mavlink_msg_mcu_status_decode(last_msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-        
-        memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mcu_status_send(MAVLINK_COMM_1 , packet1.id , packet1.MCU_temperature , packet1.MCU_voltage , packet1.MCU_voltage_min , packet1.MCU_voltage_max );
-    mavlink_msg_mcu_status_decode(last_msg, &packet2);
-        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
-}
-
 static void mavlink_test_ardupilotmega(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
     mavlink_test_sensor_offsets(system_id, component_id, last_msg);
@@ -3946,9 +3759,6 @@ static void mavlink_test_ardupilotmega(uint8_t system_id, uint8_t component_id, 
     mavlink_test_osd_param_config_reply(system_id, component_id, last_msg);
     mavlink_test_osd_param_show_config(system_id, component_id, last_msg);
     mavlink_test_osd_param_show_config_reply(system_id, component_id, last_msg);
-    mavlink_test_obstacle_distance_3d(system_id, component_id, last_msg);
-    mavlink_test_water_depth(system_id, component_id, last_msg);
-    mavlink_test_mcu_status(system_id, component_id, last_msg);
 }
 
 #ifdef __cplusplus
